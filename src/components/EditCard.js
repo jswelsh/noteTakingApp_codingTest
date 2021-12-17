@@ -1,13 +1,8 @@
 import {
-  TextareaAutosize,
-  TextField,
-  Box,
-  Card,
-  CardHeader,
-  CardContent,
-  Button,
+  Box, Button, Card, CardContent, CardHeader, Grid, TextareaAutosize,
+  TextField
 } from '@mui/material'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 export const EditCard = ({
   notes,
@@ -22,7 +17,7 @@ export const EditCard = ({
 }) => {
   const [currentNoteTitle, setCurrentNoteTitle] = useState(title)
   const [currentNoteContent, setCurrentNoteContent] = useState(content)
-  
+  console.log("hi");
   const handleTextInput = ({target:{id,value}}) => {
     if (id === "contentInputEdit") setCurrentNoteContent(value)
     if (id === "titleInputEdit") setCurrentNoteTitle(value)
@@ -43,47 +38,59 @@ export const EditCard = ({
     handleEdit(currentNotes)
   }
   return (
-    <Card >
-      <CardHeader
-        title={<TextField
-          id="titleInputEdit"
-          label="Title"
-          value={currentNoteTitle}
-          variant="standard"
-          fullWidth
-          onChange={handleTextInput}
-        />}
-        titleTypographyProps={{ align: 'center' }}
-        subheaderTypographyProps={{
-          align: 'center',
-        }}
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[200]
-              : theme.palette.grey[700],
-        }}
-      />
-      <CardContent>
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection:'column',
-          alignItems: 'baseline',
-          mb: 2,
-        }}
-        >
-          <TextareaAutosize
-            id="contentInputEdit"
-            placeholder="Add Note Content"
-            value={currentNoteContent}
-            minRows={3}
-            style={{ width: "100%"}}
+    <Grid
+      item
+      box
+      xs={12}
+    >    
+      <Card >
+        <CardHeader
+          title={<TextField
+            id="titleInputEdit"
+            label="Title"
+            value={currentNoteTitle}
+            variant="standard"
+            fullWidth
             onChange={handleTextInput}
-          />
-          <Button children='Submit' id="submitNoteEdit" variant="contained" sx={{width:"100%"}} onClick={buttonOnClickHandler} />
-        </Box>
-      </CardContent>
-    </Card>
+          />}
+          titleTypographyProps={{ align: 'center' }}
+          subheaderTypographyProps={{
+            align: 'center',
+          }}
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[200]
+                : theme.palette.grey[700],
+          }}
+        />
+        <CardContent>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection:'column',
+            alignItems: 'baseline',
+            mb: 2,
+          }}
+          >
+            <TextareaAutosize
+              id="contentInputEdit"
+              placeholder="Add Note Content"
+              value={currentNoteContent}
+              minRows={3}
+              style={{ width: "100%"}}
+              onChange={handleTextInput}
+            />
+            <Button
+              children='Submit'
+              id="submitNoteEdit"
+              variant="contained"
+              fullWidth
+              onClick={buttonOnClickHandler}
+            />
+          </Box>
+        </CardContent>
+      </Card>
+    </Grid>
   )
 }
