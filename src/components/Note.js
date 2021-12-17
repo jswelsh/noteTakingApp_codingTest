@@ -3,8 +3,9 @@ import {
   Card, CardContent, CardHeader, Grid, Typography
 } from '@mui/material';
 import React from 'react';
-import NoteActionButton from './NoteActionButton';
 import { CustomMarkdownConverter } from './CustomMarkdownConverter';
+import NoteActionButton from './NoteActionButton';
+import dayjs from 'dayjs';
 export const Note = ({
   note,
   setNoteBeingEditedIndex,
@@ -28,8 +29,8 @@ export const Note = ({
           titleTypographyProps={{ align: 'center' }}
           subheader={
           <>
-            <Typography children={'Created: ' + created}/>
-            <Typography children={'Last Edited: ' + lastEdited}/>
+            <Typography children={'Created: ' + dayjs(created).format('YY/MM/DD-HH:mm:ss')}/>
+            <Typography children={'Last Edited: ' + dayjs(lastEdited).format('YY/MM/DD-HH:mm:ss')}/>
           </>}
           subheaderTypographyProps={{align: 'center'}}
           action={

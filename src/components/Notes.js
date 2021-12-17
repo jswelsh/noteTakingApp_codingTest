@@ -4,6 +4,7 @@ import {
   Typography
 } from '@mui/material';
 import React, { useState } from 'react';
+import dayjs from 'dayjs';
 import { AddNote } from './AddNote';
 import { EditCard } from './EditCard';
 import { Note } from './Note';
@@ -42,10 +43,10 @@ export const Notes = () => {
     } else if (id === 'submitNote') {
       const currentNotes = [...notes]
       currentNotes.unshift({
-        id: Date.now(),
+        id: dayjs(),
         title: currentNoteTitle,
-        created: new Date().toISOString().slice(5,10),
-        lastEdited: new Date().toISOString().slice(5,10),
+        created: dayjs(),
+        lastEdited: dayjs(),
         content: currentNoteContent
       })
       handleUpdatingNotes(currentNotes)

@@ -3,7 +3,7 @@ import {
   TextField
 } from '@mui/material'
 import React, { useState } from 'react'
-
+import dayjs from 'dayjs'
 export const EditCard = ({
   notes,
   handleEdit,
@@ -17,7 +17,6 @@ export const EditCard = ({
 }) => {
   const [currentNoteTitle, setCurrentNoteTitle] = useState(title)
   const [currentNoteContent, setCurrentNoteContent] = useState(content)
-  console.log("hi");
   const handleTextInput = ({target:{id,value}}) => {
     if (id === "contentInputEdit") setCurrentNoteContent(value)
     if (id === "titleInputEdit") setCurrentNoteTitle(value)
@@ -29,7 +28,7 @@ export const EditCard = ({
       id: id,
       title: currentNoteTitle,
       created: created,
-      lastEdited: new Date().toISOString().slice(0,10),
+      lastEdited: dayjs(),
       content: currentNoteContent
     })
     
