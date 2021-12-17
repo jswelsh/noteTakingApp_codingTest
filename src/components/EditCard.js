@@ -10,10 +10,42 @@ import {
 import React, {useState} from 'react'
 
 export const EditCard = ({
-  title,
-  content
+  notes,
+  handleEdit,
+  // setNotes,
+  // setIsEditMode,
+  // setIsAddNoteMode,
+  noteBeingEditedIndex,
+  note:{
+    id,
+    title,
+    created,
+    lastEdited,
+    content
+  }
 }) => {
-
+  const [currentNoteTitle, setCurrentNoteTitle] = useState(title)
+  const [currentNoteContent, setCurrentNoteContent] = useState(content)
+  
+  const handleTextInput = ({target:{id,value}}) => {
+    if (id === "contentInputEdit") setCurrentNoteContent(value)
+    if (id === "titleInputEdit") setCurrentNoteTitle(value)
+  }
+  const buttonOnClickHandler = () => {
+    const currentNotes = [...notes]
+    currentNotes.splice(noteBeingEditedIndex, 1)
+    currentNotes.push({
+      id: id,
+      title: currentNoteTitle,
+      created: created,
+      lastEdited: new Date().toISOString().slice(0,10),
+      content: currentNoteContent
+    })
+    
+    setCurrentNoteContent("")
+    setCurrentNoteTitle("")
+    handleEdit(currentNotes)
+  }
   return (
     // <Popper id={noteBeingEditedIndex} open={open} anchorEl={anchorEl} transition>
     //   {({ TransitionProps }) => (
@@ -23,11 +55,22 @@ export const EditCard = ({
               title={<TextField
                 id="titleInputEdit"
                 label="Title"
-                value={title}
+                value={currentNoteTitle}
                 variant="standard"
                 fullWidth
+                onChange={handleTextInput}
               />}
+              // subheader={'created'}
               titleTypographyProps={{ align: 'center' }}
+              subheaderTypographyProps={{
+                align: 'center',
+              }}
+              sx={{
+                backgroundColor: (theme) =>
+                  theme.palette.mode === 'light'
+                    ? theme.palette.grey[200]
+                    : theme.palette.grey[700],
+              }}
             />
             <CardContent>
               <Box sx={{
@@ -41,11 +84,12 @@ export const EditCard = ({
                 <TextareaAutosize
                   id="contentInputEdit"
                   placeholder="Add Note Content"
-                  value={content}
+                  value={currentNoteContent}
                   minRows={3}
                   style={{ width: "100%"}}
+                  onChange={handleTextInput}
                 />
-                <Button children='Submit' id="submitNoteEdit" variant="contained" sx={{width:"100%"}} />
+                <Button children='Submit' id="submitNoteEdit" variant="contained" sx={{width:"100%"}} onClick={buttonOnClickHandler} />
               </Box>
             </CardContent>
           </Card>
