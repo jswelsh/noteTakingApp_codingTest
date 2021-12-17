@@ -7,7 +7,8 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
-
+import Note from './components/Note'
+import { EditCard } from './components/EditCard';
 function App() {
   return (
     <>
@@ -31,6 +32,15 @@ function App() {
         </Grid>
         <Grid item xs={12}>
           <Button children='Submit' id="submitNote" variant="contained" sx={{width:"100%"}} />
+        </Grid>
+        <Grid item xs={12}>
+        <Note
+          note={{title: 'test title', content: 'test content'}}
+        />
+        <EditCard
+          title="more test title"
+          content="testing content"
+        />
         </Grid>
     </>
   );
