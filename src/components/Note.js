@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import NoteActionButton from './NoteActionButton';
+import { CustomMarkdownConverter } from './CustomMarkdownConverter';
 export const Note = ({
   note,
   setNoteBeingEditedIndex,
@@ -54,7 +55,7 @@ export const Note = ({
             mb: 2,
           }}
           >
-            <Typography children={content} />
+            <CustomMarkdownConverter children={content} />
           </Box>
         </CardContent>
       </Card>
