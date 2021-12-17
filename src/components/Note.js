@@ -19,20 +19,23 @@ export default function Note({
   note,
   setNoteBeingEditedIndex,
   setIsEditMode,
-  index
+  index,
+  handleDelete
 }) {
-  const {title, created, lastEdited, content} = note
+
   const [anchorElNoteMenu, setAnchorElNoteMenu] = useState(null);
   const openNoteMenu = Boolean(anchorElNoteMenu);
-  const handleClick = ({target:{id}, currentTarget}, index) => {
+  const {title, created, content, lastEdited} = note
 
+  const handleClose = () => setAnchorElNoteMenu(null);
+  const handleClick = ({target:{id}, currentTarget}, index) => {
     if (id === "noteEditOrDelete") setAnchorElNoteMenu(currentTarget);
-    if (id === "edit") {
+    else if (id === "delete") handleDelete(index);
+    else if (id === "edit") {
       setNoteBeingEditedIndex(index)
       setIsEditMode(true);
-    }
+    };
   }
-  const handleClose = () => setAnchorElNoteMenu(null);
 
   return (
     <Grid
@@ -44,8 +47,13 @@ export default function Note({
       <Card >
         <CardHeader
           title={title.length > 15 ? title.substring(0, 15) + '...': title}
-          subheader={created}
           titleTypographyProps={{ align: 'center' }}
+          subheader={
+          <>
+            <Typography children={'Created: ' + created}/>
+            <Typography children={'Last Edited: ' + lastEdited}/>
+          </>}
+          subheaderTypographyProps={{align: 'center'}}
           action={<>
           <IconButton
             onClick={handleClick}
@@ -88,13 +96,10 @@ export default function Note({
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
             <MenuItem id="edit" button onClick={(event) => handleClick(event, index)} children={<><EditIcon />Edit</>} />
-            <MenuItem id="deletie" children={<><DeleteIcon />Delete</>} />
+            <MenuItem id="delete" button onClick={(event) => handleClick(event, index)} children={<><DeleteIcon />Delete</>} />
           </Menu>
           </>
         }
-          subheaderTypographyProps={{
-            align: 'center',
-          }}
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === 'light'

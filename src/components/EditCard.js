@@ -12,15 +12,11 @@ import React, {useState} from 'react'
 export const EditCard = ({
   notes,
   handleEdit,
-  // setNotes,
-  // setIsEditMode,
-  // setIsAddNoteMode,
   noteBeingEditedIndex,
   note:{
     id,
     title,
     created,
-    lastEdited,
     content
   }
 }) => {
@@ -34,7 +30,7 @@ export const EditCard = ({
   const buttonOnClickHandler = () => {
     const currentNotes = [...notes]
     currentNotes.splice(noteBeingEditedIndex, 1)
-    currentNotes.push({
+    currentNotes.unshift({
       id: id,
       title: currentNoteTitle,
       created: created,
@@ -47,54 +43,47 @@ export const EditCard = ({
     handleEdit(currentNotes)
   }
   return (
-    // <Popper id={noteBeingEditedIndex} open={open} anchorEl={anchorEl} transition>
-    //   {({ TransitionProps }) => (
-    //     <Fade {...TransitionProps}>
-          <Card >
-            <CardHeader
-              title={<TextField
-                id="titleInputEdit"
-                label="Title"
-                value={currentNoteTitle}
-                variant="standard"
-                fullWidth
-                onChange={handleTextInput}
-              />}
-              // subheader={'created'}
-              titleTypographyProps={{ align: 'center' }}
-              subheaderTypographyProps={{
-                align: 'center',
-              }}
-              sx={{
-                backgroundColor: (theme) =>
-                  theme.palette.mode === 'light'
-                    ? theme.palette.grey[200]
-                    : theme.palette.grey[700],
-              }}
-            />
-            <CardContent>
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                flexDirection:'column',
-                alignItems: 'baseline',
-                mb: 2,
-              }}
-              >
-                <TextareaAutosize
-                  id="contentInputEdit"
-                  placeholder="Add Note Content"
-                  value={currentNoteContent}
-                  minRows={3}
-                  style={{ width: "100%"}}
-                  onChange={handleTextInput}
-                />
-                <Button children='Submit' id="submitNoteEdit" variant="contained" sx={{width:"100%"}} onClick={buttonOnClickHandler} />
-              </Box>
-            </CardContent>
-          </Card>
-    //     </Fade>
-    //   )}
-    // </Popper>
+    <Card >
+      <CardHeader
+        title={<TextField
+          id="titleInputEdit"
+          label="Title"
+          value={currentNoteTitle}
+          variant="standard"
+          fullWidth
+          onChange={handleTextInput}
+        />}
+        titleTypographyProps={{ align: 'center' }}
+        subheaderTypographyProps={{
+          align: 'center',
+        }}
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[200]
+              : theme.palette.grey[700],
+        }}
+      />
+      <CardContent>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection:'column',
+          alignItems: 'baseline',
+          mb: 2,
+        }}
+        >
+          <TextareaAutosize
+            id="contentInputEdit"
+            placeholder="Add Note Content"
+            value={currentNoteContent}
+            minRows={3}
+            style={{ width: "100%"}}
+            onChange={handleTextInput}
+          />
+          <Button children='Submit' id="submitNoteEdit" variant="contained" sx={{width:"100%"}} onClick={buttonOnClickHandler} />
+        </Box>
+      </CardContent>
+    </Card>
   )
 }
