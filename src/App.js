@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import {
+  AppBar,
+  TextareaAutosize,
+  Button,
+  CssBaseline,
+  Grid,
+  TextField,
+} from '@mui/material';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <Grid item xs={12}>
+          <TextField
+            id="titleInput"
+            label="Title"
+            value={'currentNoteTitle'}
+            variant="standard"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextareaAutosize
+            id="contentInput"
+            placeholder="Add Note Content"
+            value={'currentNoteContent'}
+            minRows={3}
+            style={{ width: "100%"}}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button children='Submit' id="submitNote" variant="contained" sx={{width:"100%"}} />
+        </Grid>
+    </>
   );
 }
 
