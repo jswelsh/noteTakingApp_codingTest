@@ -12,7 +12,7 @@ function App() {
     <>
       <CssBaseline />
       <CustomAppBar />
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
         <Notes />
       </Container>
     </>

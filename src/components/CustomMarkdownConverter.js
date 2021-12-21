@@ -48,6 +48,6 @@ export const CustomMarkdownConverter = ({children}) => {
     },
   };
   return (
-    <ReactMarkdown options={options} children={children}/>
+    <ReactMarkdown style= {{overflow: 'auto'}} options={options} children={children}/>
   )
 }

@@ -4,6 +4,7 @@ import {
 } from '@mui/material'
 import React, { useState } from 'react'
 import dayjs from 'dayjs'
+
 export const EditCard = ({
   notes,
   handleEdit,
@@ -17,6 +18,7 @@ export const EditCard = ({
 }) => {
   const [currentNoteTitle, setCurrentNoteTitle] = useState(title)
   const [currentNoteContent, setCurrentNoteContent] = useState(content)
+  
   const handleTextInput = ({target:{id,value}}) => {
     if (id === "contentInputEdit") setCurrentNoteContent(value)
     if (id === "titleInputEdit") setCurrentNoteTitle(value)
@@ -36,6 +38,7 @@ export const EditCard = ({
     setCurrentNoteTitle("")
     handleEdit(currentNotes)
   }
+
   return (
     <Grid
       item
