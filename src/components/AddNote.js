@@ -5,6 +5,7 @@ import {
   Button
 } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import {addNote} from '../common/constants'
 
 export const AddNote = ({
   currentNoteTitle,
@@ -13,33 +14,38 @@ export const AddNote = ({
   setCurrentNoteContent,
   setCurrentNoteTitle
 }) => {
+
+  const {title, content, submitButton} = addNote; 
   const handleTextInput = ({target:{id,value}}) => {
-    if (id === "contentInput") setCurrentNoteContent(value)
-    if (id === "titleInput") setCurrentNoteTitle(value)
+    if (id === content.id) setCurrentNoteContent(value)
+    if (id === title.id) setCurrentNoteTitle(value)
   }
   const gridWrapper = (Component) => <Grid item xs={12} children={Component} />
   return (
     <Grid container >
       {[
         <TextField
-          id="titleInput"
-          label="Title"
+          data-cy={title.id}
+          id={title.id}
+          label={title.value}
           value={currentNoteTitle}
           variant="standard"
           fullWidth
           onChange={handleTextInput}
         />,
         <TextareaAutosize
-          id="contentInput"
-          placeholder="Add Note Content"
+          data-cy={content.id}
+          id={content.id}
+          placeholder={content.value}
           value={currentNoteContent}
           minRows={3}
           style={{ width: "100%"}}
           onChange={handleTextInput}
         />,
         <Button
-          children='Submit'
-          id="submitNote"
+          data-cy={submitButton.id}
+          children={submitButton.value}
+          id={submitButton.id}
           variant="contained"
           fullWidth
           onClick={buttonOnClickHandler}
