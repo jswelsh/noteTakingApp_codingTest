@@ -26,7 +26,7 @@ export const Notes = () => {
   const [currentNoteTitle, setCurrentNoteTitle] = useState('')
 
   const handleUpdatingNotes = (newNotes) => {
-    localStorage.setItem("notes", JSON.stringify(newNotes))
+    localStorage.setItem("notesFromJswApp", JSON.stringify(newNotes))
     setNotes(newNotes)
   }
   const handleEdit = (currentNotes) => {
