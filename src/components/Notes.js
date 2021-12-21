@@ -13,7 +13,7 @@ export const Notes = () => {
 
   const [notes, setNotes] = useState(() => {
     // getting stored notes
-    const saved = localStorage.getItem("notes");
+    const saved = localStorage.getItem("notesFromJswApp");
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });
@@ -51,8 +51,8 @@ export const Notes = () => {
       })
       handleUpdatingNotes(currentNotes)
       setIsAddNoteMode(false)
-      setCurrentNoteContent(null)
-      setCurrentNoteTitle(null)
+      setCurrentNoteContent('')
+      setCurrentNoteTitle('')
     }
   }
 

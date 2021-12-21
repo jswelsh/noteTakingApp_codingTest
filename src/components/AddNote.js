@@ -17,10 +17,10 @@ export const AddNote = ({
     if (id === "contentInput") setCurrentNoteContent(value)
     if (id === "titleInput") setCurrentNoteTitle(value)
   }
-
+  const gridWrapper = (Component) => <Grid item xs={12} children={Component} />
   return (
     <Grid container >
-      <Grid item xs={12}>
+      {[
         <TextField
           id="titleInput"
           label="Title"
@@ -28,9 +28,7 @@ export const AddNote = ({
           variant="standard"
           fullWidth
           onChange={handleTextInput}
-        />
-      </Grid>
-      <Grid item xs={12}>
+        />,
         <TextareaAutosize
           id="contentInput"
           placeholder="Add Note Content"
@@ -38,9 +36,7 @@ export const AddNote = ({
           minRows={3}
           style={{ width: "100%"}}
           onChange={handleTextInput}
-        />
-      </Grid>
-      <Grid item xs={12}>
+        />,
         <Button
           children='Submit'
           id="submitNote"
@@ -48,7 +44,7 @@ export const AddNote = ({
           fullWidth
           onClick={buttonOnClickHandler}
         />
-      </Grid>
+      ].map(Component => gridWrapper(Component))}
     </Grid>
   )
 }

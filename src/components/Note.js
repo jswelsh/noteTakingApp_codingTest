@@ -6,6 +6,8 @@ import React from 'react';
 import { CustomMarkdownConverter } from './CustomMarkdownConverter';
 import NoteActionButton from './NoteActionButton';
 import dayjs from 'dayjs';
+import {dateFormat} from '../common/constants'
+
 export const Note = ({
   note,
   setNoteBeingEditedIndex,
@@ -16,6 +18,12 @@ export const Note = ({
   
   const {title, created, content, lastEdited} = note
 
+  const getTitle = (title) => title?.length > 12 ? title.substring(0, 12) + '...': title
+  const getDate = (date) => dayjs(date).format(dateFormat)
+
+  const formattedCreatedDate = 'Created: ' + getDate(created)
+  const formattedLastEditedDate = 'Last Edited: ' + getDate(lastEdited)
+
   return (
     <Grid
       item
@@ -25,12 +33,12 @@ export const Note = ({
     >
       <Card >
         <CardHeader
-          title={title.length > 15 ? title.substring(0, 15) + '...': title}
+          title={getTitle(title)}
           titleTypographyProps={{ align: 'center' }}
           subheader={
           <>
-            <Typography children={'Created: ' + dayjs(created).format('YY/MM/DD-HH:mm:ss')}/>
-            <Typography children={'Last Edited: ' + dayjs(lastEdited).format('YY/MM/DD-HH:mm:ss')}/>
+            <Typography children={formattedCreatedDate}/>
+            <Typography children={formattedLastEditedDate}/>
           </>}
           subheaderTypographyProps={{align: 'center'}}
           action={
@@ -54,8 +62,7 @@ export const Note = ({
             justifyContent: 'center',
             alignItems: 'baseline',
             mb: 2,
-          }}
-          >
+          }}>
             <CustomMarkdownConverter children={content} />
           </Box>
         </CardContent>
