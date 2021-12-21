@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 import { AddNote } from './AddNote';
 import { EditCard } from './EditCard';
 import { Note } from './Note';
+import { addNote } from '../common/constants'
+const { addNoteButton, submitButton } = addNote;
 
 export const Notes = () => {
 
@@ -38,9 +40,9 @@ export const Notes = () => {
     handleUpdatingNotes(newCurrentNotes)
   }
   const buttonOnClickHandler = ({target:{id}}) => {
-    if (id === 'addNote') {
+    if (id === addNoteButton.id) {
       setIsAddNoteMode(true)
-    } else if (id === 'submitNote') {
+    } else if (id === submitButton.id) {
       const currentNotes = [...notes]
       currentNotes.unshift({
         id: dayjs(),
@@ -79,9 +81,10 @@ export const Notes = () => {
                 setCurrentNoteTitle={setCurrentNoteTitle}
               />
             : <Button
-                children='Add New Note'
-                id="addNote"
-                variant="contained"
+                data-cy={addNoteButton.id}
+                children={addNoteButton.value}
+                id={addNoteButton.id}
+                variant='contained'
                 fullWidth
                 onClick={buttonOnClickHandler}
               />

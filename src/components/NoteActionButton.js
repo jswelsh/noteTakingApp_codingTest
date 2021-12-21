@@ -6,7 +6,10 @@ import {
   IconButton, Menu,
   MenuItem
 } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import { noteObj } from '../common/constants'
+
 
 export default function NoteActionButton({
   index,
@@ -28,12 +31,17 @@ export default function NoteActionButton({
   }
 
   return (
-    <>
+    <Box data-cy={noteObj.actionButton.id} >
       <IconButton
         onClick={handleClick}
         size="small"
         sx={{ ml: 2 }}
-        children={<MoreVertIcon id="noteEditOrDelete"/>}
+        children={
+          <MoreVertIcon
+            id={noteObj.actionButton.id}
+            
+          />
+        }
       />
       <Menu
         anchorEl={anchorElNoteMenu}
@@ -70,18 +78,20 @@ export default function NoteActionButton({
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem
-          id="edit"
+          id={noteObj.editButton.id}
+          data-cy={noteObj.editButton.id}
           button
           onClick={(event) => handleClick(event, index)}
           children={<><EditIcon />Edit</>}
         />
         <MenuItem
-          id="delete"
+          id={noteObj.deleteButton.id}
+          data-cy={noteObj.deleteButton.id}
           button
           onClick={(event) => handleClick(event, index)}
           children={<><DeleteIcon />Delete</>}
         />
       </Menu>
-    </>
+    </Box>
   )
 }

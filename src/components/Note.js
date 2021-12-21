@@ -6,7 +6,7 @@ import React from 'react';
 import { CustomMarkdownConverter } from './CustomMarkdownConverter';
 import NoteActionButton from './NoteActionButton';
 import dayjs from 'dayjs';
-import {dateFormat} from '../common/constants'
+import {dateFormat, noteObj} from '../common/constants'
 
 export const Note = ({
   note,
@@ -33,6 +33,8 @@ export const Note = ({
     >
       <Card >
         <CardHeader
+          id={noteObj.title.id}
+          data-cy={noteObj.title.id}
           title={getTitle(title)}
           titleTypographyProps={{ align: 'center' }}
           subheader={
@@ -56,7 +58,10 @@ export const Note = ({
                 : theme.palette.grey[700],
           }}
         />
-        <CardContent>
+        <CardContent
+          id={noteObj.content.id}
+          data-cy={noteObj.content.id}
+        >
           <Box sx={{
             display: 'flex',
             justifyContent: 'center',
